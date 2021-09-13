@@ -1,0 +1,6 @@
+<h3>Авторизация</h3>
+<form [formGroup]="auth_form" (ngSubmit)="auth()">
+  <input type="text" formControlName="login">
+  <input type="password" formControlName="password">
+  <input type="submit" placeholder="Войти">
+</form>
