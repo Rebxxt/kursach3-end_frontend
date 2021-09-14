@@ -29,7 +29,6 @@ export class AuthComponent implements OnInit {
     this.authService.login(login, password).subscribe(profile => {
       if (profile) {
         this.router.navigate(['/'])
-        console.log(profile)
       } else {
         console.log('denied')
       }

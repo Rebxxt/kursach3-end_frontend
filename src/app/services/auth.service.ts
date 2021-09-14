@@ -27,7 +27,6 @@ export class AuthService {
     return this.http.post<UserInterface>('/api/auth/login/', {login, password}, {observe: 'response'})
       .pipe(tap((response) => {
         let temp = response.headers.getAll('set-cookie');
-        console.log('temp')
         console.log(response.headers)
         this.setProfile(response.body as UserInterface);
       }))

@@ -1,0 +1,37 @@
+<mat-form-field appearance="fill" >
+  <mat-label>Пользователь</mat-label>
+  <mat-select [(value)]="currentUser" (valueChange)="selectUser($event)">
+    <mat-option
+      [value]="user"
+      *ngFor="let user of users?.value"
+    >{{user?.username}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div>
+  <h1>Роли пользователя</h1>
+  <ul>
+    <li *ngFor="let role of roles?.value">
+      <mat-checkbox [(ngModel)]="role.user_has_role"
+                    (ngModelChange)="changeRole(role)">
+        {{role?.role}}
+      </mat-checkbox>
+    </li>
+  </ul>
+</div>
+
+<form [formGroup]="userTransportGroup" *ngIf="userTransportGroup">
+  <h1>Транспорт пользователя</h1>
+  <mat-list formArrayName="transports">
+    <mat-list-item *ngFor="let transportControl of userTransportGroupArray?.controls; let i = index" formGroupName="{{i}}">
+      <input type="text" placeholder="Тип транспорта" [value]="transportControl.value.type" formControlName="type">
+      <input type="text" placeholder="Регистрационный номер" [value]="transportControl.value.registrationNumber" formControlName="registrationNumber">
+      <input type="text" placeholder="Основная информация" [value]="transportControl.value.info" formControlName="info">
+      <button (click)="removeUserTransport(i)">Удалить</button>
+    </mat-list-item>
+  </mat-list>
+  <button (click)="pushToArray(null)">Добавить транспорт</button>
+  <button (click)="saveTransports()">Сохранить</button>
+</form>
+
+

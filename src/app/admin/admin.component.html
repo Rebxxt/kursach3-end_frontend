@@ -1,18 +1,21 @@
 <p>admin works!</p>
 
-<form [formGroup]="formGroup">
-  <div>
-    <input type="text" formControlName="role">
-    <button (click)="createOrder()">Создать роль</button>
-  </div>
+<div>
+  <h1>Редактирование примитивов</h1>
+  <form [formGroup]="formGroup">
+    <div>
+      <input type="text" formControlName="role">
+      <button (click)="createOrder()">Создать роль</button>
+    </div>
 
-  <div>
-    <input type="text" formControlName="build">
-    <button (click)="createBuild()">Создать тип строения</button>
-  </div>
+    <div>
+      <input type="text" formControlName="build">
+      <button (click)="createBuild()">Создать тип строения</button>
+    </div>
 
-  <div>
-    <input type="text" formControlName="transportType">
-    <button (click)="createTransportType()">Создать тип транспорта</button>
-  </div>
-</form>
+    <div>
+      <input type="text" formControlName="transportType">
+      <button (click)="createTransportType()">Создать тип транспорта</button>
+    </div>
+  </form>
+</div>

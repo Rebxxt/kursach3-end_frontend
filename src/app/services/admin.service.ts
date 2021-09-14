@@ -10,12 +10,20 @@ export class AdminService {
     private http: HttpClient
   ) { }
 
+  getRoles() {
+    return this.http.get('api/role/')
+  }
+
   createRole(role: string) {
     return this.http.post('/api/role/', {role})
   }
 
   createBuild(type: string) {
     return this.http.post('/api/build/', {type})
+  }
+
+  getTransportType() {
+    return this.http.get('api/transport-type/')
   }
 
   createTransportType(type: string) {

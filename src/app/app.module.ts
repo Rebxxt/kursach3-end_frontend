@@ -13,6 +13,12 @@ import {AuthService} from "./services/auth.service";
 import {OrderComponent} from './order/order.component';
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import { AdminComponent } from './admin/admin.component';
+import { UserEditorComponent } from './user-editor/user-editor.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {MaterialModule} from "./material.module";
 
 @NgModule({
   declarations: [
@@ -21,7 +27,8 @@ import { AdminComponent } from './admin/admin.component';
     RegistrationComponent,
     ProfileComponent,
     OrderComponent,
-    AdminComponent
+    AdminComponent,
+    UserEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -29,13 +36,17 @@ import { AdminComponent } from './admin/admin.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule
 
   ],
   providers: [
     AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
-  exports: [RouterModule],
+  exports: [
+    RouterModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
