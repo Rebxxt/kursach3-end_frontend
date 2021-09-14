@@ -24,7 +24,10 @@ export class RegistrationComponent implements OnInit {
   auth(): void {
     const login = this.auth_form.controls['login'].value
     const password = this.auth_form.controls['password'].value
-    console.log(this.authService.registration(login, password))
+    this.authService.registration(login, password).subscribe(profile => {
+      console.log('registration')
+      console.log(profile)
+    })
   }
 
 }

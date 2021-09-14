@@ -1,4 +1,4 @@
-interface UserInterface {
+export interface UserInterface {
   login: string
   phones: string[] | null
   addresses: string[] | null
