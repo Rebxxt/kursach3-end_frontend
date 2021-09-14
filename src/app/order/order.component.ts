@@ -9,17 +9,10 @@ import {FormControl} from "@angular/forms";
 })
 export class OrderComponent implements OnInit {
 
-  formControl = new FormControl('')
-
   constructor(
     private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
   }
-
-  createOrder() {
-    this.orderService.create(this.formControl.value).subscribe()
-  }
-
 }

@@ -1,3 +1,15 @@
 <div *ngIf="profile">
-  <p>profile</p>
+  <p>{{profile.username}}</p>
+  <p>FN: {{profile.firstName}}</p>
+  <p>LN: {{profile.lastName}}</p>
+  <p>email: {{profile.email}}</p>
+  <p>is staff: {{profile.isStaff}}</p>
+  <p>is active: {{profile.isActive}}</p>
+  <p>is superuser: {{profile.isSuperuser}}</p>
+  <p>date joined: {{profile.dateJoined}}</p>
+  <p>last login: {{profile.lastLogin}}</p>
+  <p>groups: {{profile.groups}}</p>
+  <p>transports: {{profile.transports}}</p>
+  <p>addresses: {{profile.addresses}}</p>
+  <p>phones: {{profile.phones}}</p>
 </div>

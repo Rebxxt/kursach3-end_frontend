@@ -12,6 +12,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {AuthService} from "./services/auth.service";
 import {OrderComponent} from './order/order.component';
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {AuthInterceptor} from "./interceptors/auth.interceptor";
     AuthComponent,
     RegistrationComponent,
     ProfileComponent,
-    OrderComponent
+    OrderComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

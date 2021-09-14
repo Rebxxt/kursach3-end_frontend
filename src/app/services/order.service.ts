@@ -9,9 +9,4 @@ export class OrderService {
   constructor(
     private http: HttpClient
   ) { }
-
-  create(role: string) {
-    return this.http.post('/api/role/', {role}, {
-      withCredentials: true,})
-  }
 }
