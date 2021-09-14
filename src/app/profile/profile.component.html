@@ -9,7 +9,16 @@
   <p>date joined: {{profile.dateJoined}}</p>
   <p>last login: {{profile.lastLogin}}</p>
   <p>groups: {{profile.groups}}</p>
-  <p>transports: {{profile.transports}}</p>
-  <p>addresses: {{profile.addresses}}</p>
-  <p>phones: {{profile.phones}}</p>
+  <p>transports:</p>
+  <ul>
+    <li *ngFor="let transport of profile.transports">{{transport.type}} - {{transport.registrationNumber}} - {{transport.info}}</li>
+  </ul>
+  <p>addresses:</p>
+  <ul>
+    <li *ngFor="let address of profile.addresses">{{address.type}} - {{address.address}} - Актульность: {{address.isActual}}</li>
+  </ul>
+  <p>phones:</p>
+  <ul>
+    <li *ngFor="let phone of profile.phones">{{phone.phone}}</li>
+  </ul>
 </div>

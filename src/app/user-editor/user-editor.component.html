@@ -24,7 +24,9 @@
   <h1>Транспорт пользователя</h1>
   <mat-list formArrayName="transports">
     <mat-list-item *ngFor="let transportControl of userTransportGroupArray?.controls; let i = index" formGroupName="{{i}}">
-      <input type="text" placeholder="Тип транспорта" [value]="transportControl.value.type" formControlName="type">
+      <mat-select style="width: 200px" formControlName="type">
+        <mat-option *ngFor="let type of this.transportTypes.value" [value]="type.id">{{type.type}}</mat-option>
+      </mat-select>
       <input type="text" placeholder="Регистрационный номер" [value]="transportControl.value.registrationNumber" formControlName="registrationNumber">
       <input type="text" placeholder="Основная информация" [value]="transportControl.value.info" formControlName="info">
       <button (click)="removeUserTransport(i)">Удалить</button>

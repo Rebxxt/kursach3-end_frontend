@@ -61,7 +61,6 @@ export class UserEditorComponent implements OnInit {
   }
 
   selectUser($event: any) {
-    console.log(this.currentUser)
     for (let role of this.roles.value) {
       role.user_has_role = (this.currentUser?.roles?.find((userRole: any) => userRole.role.id == role.id) != undefined)
     }

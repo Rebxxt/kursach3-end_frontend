@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {OrderService} from "../services/order.service";
+import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {AdminService} from "../services/admin.service";
+import {RoleInterface} from "../interfaces/role.interface";
+import {TransportTypeInterface} from "../interfaces/transport.interface";
+import {BuildInterface} from "../interfaces/build.interface";
 
 @Component({
   selector: 'app-admin',
@@ -10,10 +12,17 @@ import {AdminService} from "../services/admin.service";
 })
 export class AdminComponent implements OnInit {
 
+  roleControls: FormArray = new FormArray([])
+  buildControls: FormArray = new FormArray([])
+  transportTypeControls: FormArray = new FormArray([])
+
   formGroup = new FormGroup({
     role: new FormControl(''),
     build: new FormControl(''),
     transportType: new FormControl(''),
+    roles: new FormArray([]),
+    builds: new FormArray([]),
+    transportTypes: new FormArray([]),
   })
 
   constructor(
@@ -21,19 +30,111 @@ export class AdminComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getTransport()
+    this.getRoles()
+    this.getBuilds()
   }
 
-  createOrder() {
-    this.adminService.createRole(this.formGroup.controls['role'].value).subscribe()
+  private getRoles() {
+    this.adminService.getRoles().subscribe(response => {
+      this.roleControls = this.formGroup.controls.roles as FormArray
+      for (let role of (response as RoleInterface[])) {
+        this.roleControls.push(new FormGroup({
+          role: new FormControl(role.role),
+          id: new FormControl(role.id),
+        }))
+      }
+    });
+  }
+
+  private getBuilds() {
+    this.adminService.getBuildTypes().subscribe(response => {
+      this.buildControls = this.formGroup.controls.builds as FormArray;
+      for (let build of (response as BuildInterface[])) {
+        this.buildControls.push(new FormGroup({
+          type: new FormControl(build.type),
+          id: new FormControl(build.id),
+        }))
+      }
+    });
+  }
+
+  private getTransport() {
+    this.adminService.getTransportType().subscribe(response => {
+      this.transportTypeControls = this.formGroup.controls.transportTypes as FormArray;
+      for (let type of (response as TransportTypeInterface[])) {
+        this.transportTypeControls.push(new FormGroup({
+          type: new FormControl(type.type),
+          id: new FormControl(type.id),
+        }))
+      }
+    });
+  }
+
+  createRole() {
+    console.log(this.roleControls, this.buildControls, this.transportTypeControls)
+    this.adminService.createRole(this.formGroup.controls.role.value).subscribe((response) => {
+      const role = response as RoleInterface
+      this.roleControls?.push(new FormGroup({
+        role: new FormControl(role.role),
+        id: new FormControl(role.id),
+      }))
+    })
   }
 
   createBuild() {
-    this.adminService.createBuild(this.formGroup.controls['build'].value).subscribe()
+    this.adminService.createBuild(this.formGroup.controls.build.value).subscribe((response) => {
+      const build = response as BuildInterface
+      this.buildControls.push(new FormGroup({
+        type: new FormControl(build.type),
+        id: new FormControl(build.id),
+      }))
+    })
   }
 
   createTransportType() {
-    this.adminService.createTransportType(this.formGroup.controls['transportType'].value).subscribe()
+    this.adminService.createTransportType(this.formGroup.controls.transportType.value).subscribe((response) => {
+      const transportType = response as TransportTypeInterface
+      this.transportTypeControls.push(new FormGroup({
+        type: new FormControl(transportType.type),
+        id: new FormControl(transportType.id),
+      }))
+    })
   }
 
+  removeRole(id: number, index: number) {
+    this.adminService.deleteRole(id).subscribe(response => {
+      this.roleControls?.removeAt(index)
+    })
+  }
 
+  removeBuild(id: number, index: number) {
+    this.adminService.deleteBuild(id).subscribe(response => {
+      this.buildControls.removeAt(index)
+    })
+  }
+
+  removeTransportType(id: number, index: number) {
+    this.adminService.deleteTransportType(id).subscribe(response => {
+      this.transportTypeControls.removeAt(index)
+    })
+  }
+
+  updateRole(role: RoleInterface, index: number) {
+    this.adminService.updateRole(role).subscribe(response => {
+      this.roleControls?.controls[index].setValue(response)
+    })
+  }
+
+  updateBuild(build: BuildInterface, index: number) {
+    this.adminService.updateBuild(build).subscribe(response => {
+      this.buildControls?.controls[index].setValue(response)
+    })
+  }
+
+  updateTransportType(transportType: TransportTypeInterface, index: number) {
+    this.adminService.updateTransportType(transportType).subscribe(response => {
+      this.transportTypeControls?.controls[index].setValue(response)
+    })
+  }
 }

@@ -7,3 +7,8 @@ export interface TransportInterface {
   user: UserInterface | number
   type: string | null
 }
+
+export interface TransportTypeInterface {
+  type: string | null
+  id: number | null
+}

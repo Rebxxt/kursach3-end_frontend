@@ -3,19 +3,63 @@
 <div>
   <h1>Редактирование примитивов</h1>
   <form [formGroup]="formGroup">
-    <div>
-      <input type="text" formControlName="role">
-      <button (click)="createOrder()">Создать роль</button>
-    </div>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Роли</mat-panel-title>
+        </mat-expansion-panel-header>
 
-    <div>
-      <input type="text" formControlName="build">
-      <button (click)="createBuild()">Создать тип строения</button>
-    </div>
+        <div>
+          <input type="text" formControlName="role">
+          <button (click)="createRole()">Создать роль</button>
+        </div>
 
-    <div>
-      <input type="text" formControlName="transportType">
-      <button (click)="createTransportType()">Создать тип транспорта</button>
-    </div>
+        <mat-list formArrayName="roles">
+          <mat-list-item *ngFor="let role of roleControls?.value; let i = index" formGroupName="{{i}}">
+            <input type="text" placeholder="Роль" [value]="role.role" formControlName="role">
+            <button (click)="removeRole(role.id, i)">Удалить</button>
+            <button (click)="updateRole(role, i)" [disabled]="roleControls.controls[i].pristine">Сохранить</button>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Строения</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+          <input type="text" formControlName="build">
+          <button (click)="createBuild()">Создать тип строения</button>
+        </div>
+
+        <mat-list formArrayName="builds">
+          <mat-list-item *ngFor="let build of buildControls.value; let i = index" formGroupName="{{i}}">
+            <input type="text" placeholder="Строение" [value]="build.type" formControlName="type">
+            <button (click)="removeBuild(build.id, i)">Удалить</button>
+            <button (click)="updateBuild(build, i)" [disabled]="buildControls.controls[i].pristine">Сохранить</button>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Типы транспорта</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+          <input type="text" formControlName="transportType">
+          <button (click)="createTransportType()">Создать тип транспорта</button>
+        </div>
+
+        <mat-list formArrayName="transportTypes">
+          <mat-list-item *ngFor="let transport of transportTypeControls.value; let i = index" formGroupName="{{i}}">
+            <input type="text" placeholder="Строение" [value]="transport.type" formControlName="type">
+            <button (click)="removeTransportType(transport.id, i)">Удалить</button>
+            <button (click)="updateTransportType(transport, i)" [disabled]="transportTypeControls.controls[i].pristine">Сохранить</button>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
   </form>
 </div>

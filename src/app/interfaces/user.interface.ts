@@ -1,11 +1,13 @@
 import {RoleInterface} from "./role.interface";
 import {UserTransportInterface} from "./user-transport.interface";
+import {AddressInterface} from "./address.interface";
+import {PhoneInterface} from "./phone.interface";
 
 export interface UserInterface {
   id: number
   username: string
-  phones: string[] | null
-  addresses: string[] | null
+  phones: PhoneInterface[] | null
+  addresses: AddressInterface[] | null
   transports: UserTransportInterface[] | null
   groups: string[] | null
   roles: RoleInterface[] | null
