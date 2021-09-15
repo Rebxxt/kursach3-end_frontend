@@ -168,6 +168,21 @@
       <td mat-cell *matCellDef="let element"> {{element.order}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="counter">
+      <th mat-header-cell *matHeaderCellDef>Количество</th>
+      <td mat-cell *matCellDef="let element; let i = index"  [formGroupName]="i">
+        <p *ngIf="!itemArrayForm.controls[i].value.editor">
+          {{element.counter}}
+        </p>
+        <input
+          *ngIf="itemArrayForm.controls[i].value.editor"
+          type="number"
+          min="0"
+          formControlName="counter"
+        />
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="editor">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element; let i = index">

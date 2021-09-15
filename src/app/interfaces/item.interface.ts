@@ -2,6 +2,7 @@ import {OrderInterface} from "./order.interface";
 
 export interface ItemInterface {
   id: number
+  counter: number
   item: string
   code: string
   isFragile: boolean

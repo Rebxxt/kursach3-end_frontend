@@ -14,6 +14,7 @@ export class ItemStorageComponent implements OnInit {
   itemCreatorForm: FormGroup = new FormGroup({
     item: new FormControl(''),
     code: new FormControl(''),
+    counter: new FormControl(0),
     isFragile: new FormControl(false),
     isSunlightDamaged: new FormControl(false),
     isMoistureDamaged: new FormControl(false),
@@ -25,7 +26,7 @@ export class ItemStorageComponent implements OnInit {
   orders: OrderInterface[] = [];
   items: MatTableDataSource<ItemInterface> = new MatTableDataSource<ItemInterface>([]);
   displayedColumns: string[] = ['id', 'code', 'item', 'isFragile', 'isSunlightDamaged', 'isMoistureDamaged',
-    'isTemperatureDamaged', 'minTemperature', 'maxTemperature', 'order', 'editor', 'save'];
+    'isTemperatureDamaged', 'minTemperature', 'maxTemperature', 'order', 'counter', 'editor', 'save'];
   itemsForm = new FormGroup({
     'items': new FormArray([])
   })
@@ -70,6 +71,7 @@ export class ItemStorageComponent implements OnInit {
     return new FormGroup({
       id: new FormControl(item.id),
       code: new FormControl(item.code),
+      counter: new FormControl(item.counter),
       item: new FormControl(item.item),
       isFragile: new FormControl(item.isFragile),
       isSunlightDamaged: new FormControl(item.isSunlightDamaged),
@@ -99,6 +101,7 @@ export class ItemStorageComponent implements OnInit {
     let tableValue = this.items.data[i];
     tableValue.item = value.item
     tableValue.code = value.code
+    tableValue.counter = value.counter
     tableValue.isFragile = value.isFragile
     tableValue.isMoistureDamaged = value.isMoistureDamaged
     tableValue.isTemperatureDamaged = value.isTemperatureDamaged
