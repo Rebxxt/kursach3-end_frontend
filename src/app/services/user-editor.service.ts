@@ -24,7 +24,6 @@ export class UserEditorService {
       return this.http.post('/api/user-role/', {user: user.id, role: role.id})
     else {
       const userRoleId = (user.roles?.find((userRole: any) => userRole.role.id == role.id) as any).id
-      console.log(user.roles)
       return this.http.delete(`/api/user-role/${userRoleId}/`)
     }
   }

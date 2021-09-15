@@ -15,8 +15,8 @@
         <mat-list formArrayName="roles">
           <mat-list-item *ngFor="let role of roleControls?.value; let i = index" formGroupName="{{i}}">
             <input type="text" placeholder="Роль" [value]="role.role" formControlName="role">
-            <button (click)="removeRole(role.id, i)">Удалить</button>
-            <button (click)="updateRole(role, i)" [disabled]="roleControls.controls[i].pristine">Сохранить</button>
+            <button (click)="removeRole(role.id, i)" *ngIf="!role.isBase">Удалить</button>
+            <button (click)="updateRole(role, i)" [disabled]="roleControls.controls[i].pristine" *ngIf="!role.isBase">Сохранить</button>
           </mat-list-item>
         </mat-list>
       </mat-expansion-panel>
@@ -34,8 +34,8 @@
         <mat-list formArrayName="builds">
           <mat-list-item *ngFor="let build of buildControls.value; let i = index" formGroupName="{{i}}">
             <input type="text" placeholder="Строение" [value]="build.type" formControlName="type">
-            <button (click)="removeBuild(build.id, i)">Удалить</button>
-            <button (click)="updateBuild(build, i)" [disabled]="buildControls.controls[i].pristine">Сохранить</button>
+            <button (click)="removeBuild(build.id, i)" *ngIf="!build.isBase">Удалить</button>
+            <button (click)="updateBuild(build, i)" [disabled]="buildControls.controls[i].pristine" *ngIf="!build.isBase">Сохранить</button>
           </mat-list-item>
         </mat-list>
       </mat-expansion-panel>
@@ -53,8 +53,8 @@
         <mat-list formArrayName="transportTypes">
           <mat-list-item *ngFor="let transport of transportTypeControls.value; let i = index" formGroupName="{{i}}">
             <input type="text" placeholder="Строение" [value]="transport.type" formControlName="type">
-            <button (click)="removeTransportType(transport.id, i)">Удалить</button>
-            <button (click)="updateTransportType(transport, i)" [disabled]="transportTypeControls.controls[i].pristine">Сохранить</button>
+            <button (click)="removeTransportType(transport.id, i)" *ngIf="!transport.isBase">Удалить</button>
+            <button (click)="updateTransportType(transport, i)" [disabled]="transportTypeControls.controls[i].pristine" *ngIf="!transport.isBase">Сохранить</button>
           </mat-list-item>
         </mat-list>
       </mat-expansion-panel>

@@ -1,4 +1,4 @@
-import {RoleInterface} from "./role.interface";
+import {RoleInterface, RoleUserInterface} from "./role.interface";
 import {UserTransportInterface} from "./user-transport.interface";
 import {AddressInterface} from "./address.interface";
 import {PhoneInterface} from "./phone.interface";
@@ -10,7 +10,7 @@ export interface UserInterface {
   addresses: AddressInterface[] | null
   transports: UserTransportInterface[] | null
   groups: string[] | null
-  roles: RoleInterface[] | null
+  roles: RoleUserInterface[] | null
   firstName: string | null
   lastName: string | null
   email: string | null

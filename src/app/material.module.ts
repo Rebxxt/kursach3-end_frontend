@@ -10,6 +10,7 @@ import {MatTableModule} from "@angular/material/table";
 import {CdkTableModule} from "@angular/cdk/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 
 
@@ -26,6 +27,7 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     CdkTableModule,
     MatButtonModule,
     MatButtonToggleModule,
+    MatSlideToggleModule,
   ]
 })
 export class MaterialModule { }

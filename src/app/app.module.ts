@@ -21,6 +21,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MaterialModule} from "./material.module";
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderCreateComponent } from './order-create/order-create.component';
+import { ItemStorageComponent } from './item-storage/item-storage.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { OrderCreateComponent } from './order-create/order-create.component';
     AdminComponent,
     UserEditorComponent,
     OrderHistoryComponent,
-    OrderCreateComponent
+    OrderCreateComponent,
+    ItemStorageComponent
   ],
   imports: [
     BrowserModule,

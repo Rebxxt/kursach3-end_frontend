@@ -41,6 +41,7 @@ export class AdminComponent implements OnInit {
       for (let role of (response as RoleInterface[])) {
         this.roleControls.push(new FormGroup({
           role: new FormControl(role.role),
+          isBase: new FormControl(role.isBase),
           id: new FormControl(role.id),
         }))
       }
@@ -53,6 +54,7 @@ export class AdminComponent implements OnInit {
       for (let build of (response as BuildInterface[])) {
         this.buildControls.push(new FormGroup({
           type: new FormControl(build.type),
+          isBase: new FormControl(build.isBase),
           id: new FormControl(build.id),
         }))
       }
@@ -65,6 +67,7 @@ export class AdminComponent implements OnInit {
       for (let type of (response as TransportTypeInterface[])) {
         this.transportTypeControls.push(new FormGroup({
           type: new FormControl(type.type),
+          isBase: new FormControl(type.isBase),
           id: new FormControl(type.id),
         }))
       }
@@ -72,11 +75,11 @@ export class AdminComponent implements OnInit {
   }
 
   createRole() {
-    console.log(this.roleControls, this.buildControls, this.transportTypeControls)
     this.adminService.createRole(this.formGroup.controls.role.value).subscribe((response) => {
       const role = response as RoleInterface
       this.roleControls?.push(new FormGroup({
         role: new FormControl(role.role),
+        isBase: new FormControl(role.isBase),
         id: new FormControl(role.id),
       }))
       this.formGroup.controls.role.reset()
@@ -88,6 +91,7 @@ export class AdminComponent implements OnInit {
       const build = response as BuildInterface
       this.buildControls.push(new FormGroup({
         type: new FormControl(build.type),
+        isBase: new FormControl(build.isBase),
         id: new FormControl(build.id),
       }))
       this.formGroup.controls.build.reset()
@@ -99,6 +103,7 @@ export class AdminComponent implements OnInit {
       const transportType = response as TransportTypeInterface
       this.transportTypeControls.push(new FormGroup({
         type: new FormControl(transportType.type),
+        isBase: new FormControl(transportType.isBase),
         id: new FormControl(transportType.id),
       }))
       this.formGroup.controls.transportType.reset()

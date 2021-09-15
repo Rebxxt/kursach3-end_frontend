@@ -1,0 +1,192 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Создать предмет</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="itemCreatorForm">
+      <div>
+        <span>Название:</span>
+        <input type="text" formControlName="item">
+      </div>
+
+      <div>
+        <span>Код:</span>
+        <input type="text" formControlName="code">
+      </div>
+
+      <mat-slide-toggle formControlName="isFragile" class="toggle-button">
+        Хрупкий
+      </mat-slide-toggle>
+
+      <mat-slide-toggle formControlName="isSunlightDamaged" class="toggle-button">
+        Подвержен повреждению солнечных лучей
+      </mat-slide-toggle>
+
+      <mat-slide-toggle formControlName="isMoistureDamaged" class="toggle-button">
+        Подвержен повреждению от влаги
+      </mat-slide-toggle>
+
+      <mat-slide-toggle formControlName="isTemperatureDamaged" class="toggle-button">
+        Требуется хранить при конкретной температуре
+      </mat-slide-toggle>
+
+      <div>
+        <span>Минимальная температура:</span>
+        <input type="number" min="-273" max="1000" formControlName="minTemperature">
+      </div>
+
+      <div>
+        <span>Максимальная температура:</span>
+        <input type="number" min="-273" max="1000" formControlName="maxTemperature">
+      </div>
+
+      <div>
+        <span>Заказы: {{ orders.length }}</span>
+        <mat-select style="width: 200px" formControlName="order">
+          <mat-option *ngFor="let order of orders">
+            {{order.id ? order.id : 'Пустое значение'}}
+          </mat-option>
+        </mat-select>
+      </div>
+
+      <button mat-raised-button color="primary" (click)="createItem()">Создать</button>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<form [formGroup]="itemsForm">
+  <table mat-table [dataSource]="items.data" style="width: 100%" formArrayName="items">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID</th>
+      <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
+        <p>{{element.id}}</p>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef> Код</th>
+      <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
+        <p *ngIf="!itemArrayForm.controls[i].value.editor">{{element.code}}</p>
+        <input
+          *ngIf="itemArrayForm.controls[i].value.editor"
+          formControlName="code"
+        />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="item">
+      <th mat-header-cell *matHeaderCellDef> Название</th>
+      <td mat-cell *matCellDef="let element; let i = index" [formGroupName]="i">
+        <p *ngIf="!itemArrayForm.controls[i].value.editor">{{element.item}}</p>
+        <input
+          *ngIf="itemArrayForm.controls[i].value.editor"
+          formControlName="item"
+        />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isFragile">
+      <th mat-header-cell *matHeaderCellDef class="center"> Хрупкий</th>
+      <td mat-cell *matCellDef="let element; let i = index" class="center" [formGroupName]="i">
+        <p *ngIf="!itemArrayForm.controls[i].value.editor">{{element.isFragile ? '+' : '' }}</p>
+        <mat-slide-toggle
+          *ngIf="itemArrayForm.controls[i].value.editor"
+          formControlName="isFragile"></mat-slide-toggle>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isSunlightDamaged">
+      <th mat-header-cell *matHeaderCellDef class="center"> Свет</th>
+      <td mat-cell *matCellDef="let element; let i = index" class="center" [formGroupName]="i">
+        <p *ngIf="!itemArrayForm.controls[i].value.editor"
+          >{{element.isSunlightDamaged ? '+' : '' }}</p>
+        <mat-slide-toggle
+          *ngIf="itemArrayForm.controls[i].value.editor"
+          formControlName="isSunlightDamaged"></mat-slide-toggle>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isMoistureDamaged">
+      <th mat-header-cell *matHeaderCellDef class="center"> Влага</th>
+      <td mat-cell *matCellDef="let element; let i = index" class="center" [formGroupName]="i">
+        <p *ngIf="!itemArrayForm.controls[i].value.editor"
+          >{{element.isMoistureDamaged ? '+' : '' }}</p>
+        <mat-slide-toggle
+          *ngIf="itemArrayForm.controls[i].value.editor"
+          formControlName="isMoistureDamaged"></mat-slide-toggle>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isTemperatureDamaged">
+      <th mat-header-cell *matHeaderCellDef class="center"> Температура</th>
+      <td mat-cell *matCellDef="let element; let i = index" class="center" [formGroupName]="i">
+        <p *ngIf="!itemArrayForm.controls[i].value.editor"
+          >{{element.isTemperatureDamaged ? '+' : '' }}</p>
+        <mat-slide-toggle
+          *ngIf="itemArrayForm.controls[i].value.editor"
+          formControlName="isTemperatureDamaged"></mat-slide-toggle>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="minTemperature">
+      <th mat-header-cell *matHeaderCellDef class="center"> Минимальная температура</th>
+      <td mat-cell *matCellDef="let element; let i = index" class="center" [formGroupName]="i">
+        <p *ngIf="!itemArrayForm.controls[i].value.editor ||
+         itemArrayForm.controls[i].value.editor && !itemArrayForm.controls[i].value.isTemperatureDamaged">
+          {{element.minTemperature}}
+        </p>
+        <input
+          *ngIf="itemArrayForm.controls[i].value.editor && itemArrayForm.controls[i].value.isTemperatureDamaged"
+          type="number"
+          min="-273"
+          max="1000"
+          formControlName="minTemperature"
+        />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="maxTemperature">
+      <th mat-header-cell *matHeaderCellDef class="center"> Максимальная температура</th>
+      <td mat-cell *matCellDef="let element; let i = index" class="center" [formGroupName]="i">
+        <p *ngIf="!itemArrayForm.controls[i].value.editor ||
+         itemArrayForm.controls[i].value.editor && !itemArrayForm.controls[i].value.isTemperatureDamaged">
+          {{element.maxTemperature}}
+        </p>
+        <input
+          *ngIf="itemArrayForm.controls[i].value.editor && itemArrayForm.controls[i].value.isTemperatureDamaged"
+          type="number"
+          min="-273"
+          max="1000"
+          formControlName="maxTemperature"
+        />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="order">
+      <th mat-header-cell *matHeaderCellDef> ID заказа</th>
+      <td mat-cell *matCellDef="let element"> {{element.order}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="editor">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <button (click)="setEditMode(i)">Редактировать</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="save">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <button
+          *ngIf="itemArrayForm.controls[i].value.editor"
+          [disabled]="itemArrayForm.controls[i].pristine"
+          (click)="save(i)"
+        >Сохранить</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" formGroupName="{{i}}"></tr>
+  </table>
+</form>

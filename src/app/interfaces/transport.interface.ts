@@ -11,4 +11,5 @@ export interface TransportInterface {
 export interface TransportTypeInterface {
   type: string | null
   id: number | null
+  isBase: boolean | null
 }

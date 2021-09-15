@@ -1,6 +1,6 @@
 <h1>Список заказов</h1>
 
-<button mat-raised-button color="primary" (click)="createOrder()">
+<button mat-raised-button color="primary" (click)="createOrder()" *ngIf="profile != null && isManager">
   Оформить заказ
 </button>
 

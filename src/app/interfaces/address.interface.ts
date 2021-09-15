@@ -1,5 +1,5 @@
 export interface AddressInterface {
-  id: number | null
+  id: number
   address: string | null
   isActual: boolean | null
   user: number | null
