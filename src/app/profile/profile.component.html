@@ -12,19 +12,33 @@
 
   <p>transports:</p>
   <ul>
-    <li *ngFor="let transport of profile.transports">{{transport.type}} - {{transport.registrationNumber}} - {{transport.info}}</li>
-  </ul>
-
-  <p>addresses:</p>
-  <ul>
-    <li *ngFor="let address of profile.addresses">{{address.type}} - {{address.address}} - Актульность: {{address.isActual}}</li>
+    <li *ngFor="let transport of profile.transports">{{transport.type}} - {{transport.registrationNumber}}
+      - {{transport.info}}</li>
   </ul>
 
   <div>
-    <p>phones:
+    <p>addresses:      <button (click)="openPhoneInput()">{{!showPhoneEditor ? 'Редактировать' : 'Скрыть редактирование' }}</button>
+    </p>
 
+    <div *ngIf="showAddressEditor">
+      <input type="text" [formControl]="addressControl">
+      <button (click)="addUserAddress()">Добавить</button>
+    </div>
+
+    <mat-list>
+      <mat-list-item *ngFor="let address of profile.addresses; let i = index">
+        <p>{{address.type}} - {{address.address}} - Актульность: {{address.isActual}}</p>
+        <button (click)="deleteUserAddress(address.id, i)" *ngIf="showAddressEditor">Удалить</button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div>
+    <p>
+      <span>phones:</span>
       <button (click)="openPhoneInput()">{{!showPhoneEditor ? 'Редактировать' : 'Скрыть редактирование' }}</button>
     </p>
+
     <div *ngIf="showPhoneEditor">
       <input type="text" [formControl]="phoneControl">
       <button (click)="addUserProne()">Добавить</button>

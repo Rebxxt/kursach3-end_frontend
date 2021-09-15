@@ -4,6 +4,7 @@ import {RoleInterface} from "../interfaces/role.interface";
 import {UserInterface} from "../interfaces/user.interface";
 import {UserTransportInterface} from "../interfaces/user-transport.interface";
 import {PhoneInterface} from "../interfaces/phone.interface";
+import {AddressInterface} from "../interfaces/address.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,20 @@ export class UserEditorService {
     return this.http.post('/api/phone/', {phone, user: user.id})
   }
 
+  addUserAddress(address: AddressInterface, user: UserInterface) {
+    let body = {
+      address: address.address,
+      type: address.type,
+      user: user.id,
+    };
+    return this.http.post('/api/address/', body)
+  }
+
   deleteUserPhone(phoneId: number) {
     return this.http.delete(`/api/phone/${phoneId}`)
+  }
+
+  deleteUserAddress(addressId: number) {
+    return this.http.delete(`/api/address/${addressId}/`)
   }
 }

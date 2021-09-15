@@ -101,7 +101,9 @@ export class UserEditorComponent implements OnInit {
 
   saveTransports() {
     if (this.currentUser)
-      this.userEditor.updateUserTransport(this.userTransportGroupArray?.value, this.currentUser).subscribe()
+      this.userEditor.updateUserTransport(this.userTransportGroupArray?.value, this.currentUser).subscribe(response => {
+        this.auth.current().subscribe()
+      })
   }
 
   removeUserTransport(position: number) {

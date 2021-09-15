@@ -79,6 +79,7 @@ export class AdminComponent implements OnInit {
         role: new FormControl(role.role),
         id: new FormControl(role.id),
       }))
+      this.formGroup.controls.role.reset()
     })
   }
 
@@ -89,6 +90,7 @@ export class AdminComponent implements OnInit {
         type: new FormControl(build.type),
         id: new FormControl(build.id),
       }))
+      this.formGroup.controls.build.reset()
     })
   }
 
@@ -99,6 +101,7 @@ export class AdminComponent implements OnInit {
         type: new FormControl(transportType.type),
         id: new FormControl(transportType.id),
       }))
+      this.formGroup.controls.transportType.reset()
     })
   }
 
@@ -122,19 +125,22 @@ export class AdminComponent implements OnInit {
 
   updateRole(role: RoleInterface, index: number) {
     this.adminService.updateRole(role).subscribe(response => {
-      this.roleControls?.controls[index].setValue(response)
+      this.roleControls?.controls[index].setValue(response);
+      this.roleControls?.controls[index].markAsPristine()
     })
   }
 
   updateBuild(build: BuildInterface, index: number) {
     this.adminService.updateBuild(build).subscribe(response => {
-      this.buildControls?.controls[index].setValue(response)
+      this.buildControls?.controls[index].setValue(response);
+      this.buildControls?.controls[index].markAsPristine()
     })
   }
 
   updateTransportType(transportType: TransportTypeInterface, index: number) {
     this.adminService.updateTransportType(transportType).subscribe(response => {
-      this.transportTypeControls?.controls[index].setValue(response)
+      this.transportTypeControls?.controls[index].setValue(response);
+      this.transportTypeControls?.controls[index].markAsPristine()
     })
   }
 }
