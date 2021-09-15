@@ -1,4 +1,4 @@
 export interface PhoneInterface {
   phone: string | null
-  id: number | null
+  id: number
 }

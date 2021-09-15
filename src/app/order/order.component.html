@@ -1,1 +1,25 @@
-<p>order works!</p>
+<h1>Список заказов</h1>
+
+<button mat-raised-button color="primary" (click)="createOrder()">
+  Оформить заказ
+</button>
+
+<table mat-table [dataSource]="orders" class="mat-elevation-z8" style="width: 100%">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef> Адрес </th>
+    <td mat-cell *matCellDef="let element"> {{element.actualAddress}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef> Телефон </th>
+    <td mat-cell *matCellDef="let element"> {{element.actualPhone}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

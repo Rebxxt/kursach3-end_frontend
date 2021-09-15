@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -11,11 +12,15 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
   ) { }
 
   auth_form = new FormGroup({
+    'firstName': new FormControl(''),
+    'secondName': new FormControl(''),
     'login': new FormControl(''),
-    'password': new FormControl('')
+    'password': new FormControl(''),
+    'password_repeat': new FormControl(''),
   })
 
   ngOnInit(): void {
@@ -25,8 +30,7 @@ export class RegistrationComponent implements OnInit {
     const login = this.auth_form.controls['login'].value
     const password = this.auth_form.controls['password'].value
     this.authService.registration(login, password).subscribe(profile => {
-      console.log('registration')
-      console.log(profile)
+      this.router.navigate(['/'])
     })
   }
 

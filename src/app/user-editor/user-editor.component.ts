@@ -8,6 +8,7 @@ import {RoleInterface} from "../interfaces/role.interface";
 import {tap} from "rxjs/operators";
 import {TransportInterface} from "../interfaces/transport.interface";
 import {UserTransportInterface} from "../interfaces/user-transport.interface";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-user-editor',
@@ -30,6 +31,7 @@ export class UserEditorComponent implements OnInit {
   constructor(
     private userEditor: UserEditorService,
     private adminService: AdminService,
+    private auth: AuthService,
   ) {
   }
 
@@ -88,7 +90,11 @@ export class UserEditorComponent implements OnInit {
   }
 
   changeRole(role: RoleInterface) {
-    this.userEditor.changeRole(role, this.currentUser as UserInterface).subscribe(response => {
+    this.userEditor.changeRole(role, this.currentUser as UserInterface).pipe(tap(res => {
+      if (this.currentUser?.id == this.auth.profile.value?.id) {
+        this.auth.current().subscribe()
+      }
+    })).subscribe(response => {
       this.getUsers().subscribe()
     })
   }

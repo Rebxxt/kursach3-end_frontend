@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {UserInterface} from "../interfaces/user.interface";
 import {AuthService} from "../services/auth.service";
+import {UserEditorService} from "../services/user-editor.service";
+import {FormControl} from "@angular/forms";
+import {PhoneInterface} from "../interfaces/phone.interface";
 
 @Component({
   selector: 'app-profile',
@@ -11,8 +14,12 @@ export class ProfileComponent implements OnInit {
 
   profile: UserInterface | null = null
 
+  showPhoneEditor: boolean = false
+  phoneControl: FormControl = new FormControl();
+
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private userEditor: UserEditorService,
   ) {
   }
 
@@ -28,4 +35,19 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  openPhoneInput() {
+    this.showPhoneEditor = !this.showPhoneEditor
+  }
+
+  addUserProne() {
+    this.userEditor.addUserPhone(this.phoneControl.value, this.profile as UserInterface).subscribe(response => {
+      this.profile?.phones?.push(response as PhoneInterface)
+    })
+  }
+
+  deleteUserPhone(phoneId: number, index: number) {
+    this.userEditor.deleteUserPhone(phoneId).subscribe(response => {
+      this.profile?.phones?.splice(index, 1)
+    })
+  }
 }

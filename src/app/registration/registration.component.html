@@ -1,6 +1,7 @@
 <h3>Регистрация</h3>
 <form [formGroup]="auth_form" (ngSubmit)="auth()">
-  <input type="text" formControlName="fio" placeholder="ФИО">
+  <input type="text" formControlName="firstName" placeholder="Имя">
+  <input type="text" formControlName="secondName" placeholder="Фамилия">
   <input type="text" formControlName="login" placeholder="Логин">
   <input type="password" formControlName="password" placeholder="Пароль">
   <input type="password" formControlName="password_repeat" placeholder="Повторите пароль">

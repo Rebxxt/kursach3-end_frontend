@@ -1,5 +1,5 @@
 export interface RoleInterface {
   user_has_role: boolean | null
-  role: string
+  role: RoleInterface | string
   id: number
 }

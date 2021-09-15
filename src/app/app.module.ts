@@ -19,6 +19,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MaterialModule} from "./material.module";
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderCreateComponent } from './order-create/order-create.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {MaterialModule} from "./material.module";
     ProfileComponent,
     OrderComponent,
     AdminComponent,
-    UserEditorComponent
+    UserEditorComponent,
+    OrderHistoryComponent,
+    OrderCreateComponent
   ],
   imports: [
     BrowserModule,
