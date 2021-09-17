@@ -22,6 +22,8 @@ import {MaterialModule} from "./material.module";
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderCreateComponent } from './order-create/order-create.component';
 import { ItemStorageComponent } from './item-storage/item-storage.component';
+import { NotificationComponent } from './notification/notification.component';
+import { OrderInfoComponent } from './order-info/order-info.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ItemStorageComponent } from './item-storage/item-storage.component';
     UserEditorComponent,
     OrderHistoryComponent,
     OrderCreateComponent,
-    ItemStorageComponent
+    ItemStorageComponent,
+    NotificationComponent,
+    OrderInfoComponent
   ],
   imports: [
     BrowserModule,

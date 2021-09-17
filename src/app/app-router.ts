@@ -10,12 +10,14 @@ import {OrderCreateComponent} from "./order-create/order-create.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {IsManagerGuard} from "./guards/is-manager.guard";
 import {ItemStorageComponent} from "./item-storage/item-storage.component";
+import {OrderInfoComponent} from "./order-info/order-info.component";
 
 export const routes: Routes = [
   {path: 'auth', component: AuthComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'order', component: OrderComponent, canActivate: [AuthGuard]},
+  {path: 'order-info/:id', component: OrderInfoComponent, canActivate: [AuthGuard]},
   {path: 'order/create', component: OrderCreateComponent, canActivate: [AuthGuard, IsManagerGuard]},
   {path: 'order/history', component: OrderHistoryComponent, canActivate: [AuthGuard]},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},

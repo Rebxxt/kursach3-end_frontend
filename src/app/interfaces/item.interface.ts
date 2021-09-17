@@ -1,4 +1,5 @@
 import {OrderInterface} from "./order.interface";
+import {OrderItemInterface} from "./order-item.interface";
 
 export interface ItemInterface {
   id: number
@@ -13,4 +14,5 @@ export interface ItemInterface {
   maxTemperature: number | null
   order: number | OrderInterface | null
   editor: boolean | null
+  itemOrder: OrderItemInterface
 }

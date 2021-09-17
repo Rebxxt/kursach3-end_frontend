@@ -1,0 +1,62 @@
+<div *ngIf="order">
+  <h4>Заказ #{{order.id}}</h4>
+  <div>
+    <h5>Контактная информация:</h5>
+    <p>Номер телефона: {{order.actualPhone?.phone}}</p>
+    <p>Адрес: {{order.actualAddress?.address}}</p>
+  </div>
+
+  <div>
+    <h5>Содержимое заказа:</h5>
+    <ul>
+      <li *ngFor="let item of order.items">
+        <span>{{item.code}} - {{item.item}} - {{item?.itemOrder?.counter}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h5>История заказа:</h5>
+    <ul>
+      <li *ngFor="let history of orderHistory">
+        <span *ngIf="history?.status?.status == 'initial'">Инициализирован</span>
+        <span *ngIf="history?.status?.status == 'sort'">Находится в сортировочном центре</span>
+        <span *ngIf="history?.status?.status == 'delivery'">Доставляет "{{history?.carries?.firstName}} {{history?.carries?.lastName}}" на транспорте {{history?.transport?.registrationNumber}}</span>
+        <span *ngIf="history?.status?.status == 'finish_point'">Достиг пункта назначения</span>
+        <span *ngIf="history?.status?.status == 'ready'">Получен</span>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!historyFinished">
+    <h5>Обновить историю заказа:</h5>
+    <mat-select [(value)]="currentStatus" style="width: 200px">
+      <mat-option
+        [value]="status"
+        *ngFor="let status of statuses"
+      >{{status.status}}</mat-option>
+    </mat-select>
+
+    <div *ngIf="currentStatus?.status == 'delivery'">
+      <mat-select [formControl]="controlCarries" style="width: 200px" (valueChange)="getTransports($event)">
+        <mat-option
+          [value]="carrier"
+          *ngFor="let carrier of carries"
+        >{{carrier.username}}</mat-option>
+      </mat-select>
+      <mat-select [formControl]="controlTransports" style="width: 200px">
+        <mat-option
+          [value]="transport"
+          *ngFor="let transport of transports"
+        >{{transport.registrationNumber}} - {{transport.type}}</mat-option>
+      </mat-select>
+    </div>
+
+    <button (click)="updateStatus()">Обновить статус</button>
+  </div>
+</div>
+
+<div *ngIf="!order">
+  <h1 *ngIf="!loaded">Загрузка...</h1>
+  <h1 *ngIf="loaded">404: Страница не найдена</h1>
+</div>

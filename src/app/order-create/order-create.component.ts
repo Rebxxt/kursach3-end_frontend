@@ -9,6 +9,10 @@ import {AddressInterface} from "../interfaces/address.interface";
 import {tap} from "rxjs/operators";
 import {RoleInterface} from "../interfaces/role.interface";
 import {Subscription} from "rxjs";
+import {ItemInterface} from "../interfaces/item.interface";
+import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {OrderService} from "../services/order.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-order-create',
@@ -16,6 +20,8 @@ import {Subscription} from "rxjs";
   styleUrls: ['./order-create.component.css']
 })
 export class OrderCreateComponent implements OnInit, OnDestroy {
+
+  items: ItemInterface[] = []
 
   users: UserInterface[] = []
   currentUser: UserInterface | null = null;
@@ -25,11 +31,18 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
   currentPhone: PhoneInterface | null = null;
 
   subscriptions: Subscription = new Subscription()
+  itemsForm: FormGroup = new FormGroup({
+    items: new FormArray([])
+  });
+  itemArrayForm: FormArray = new FormArray([]);
+  hasSelected: boolean = false;
 
   constructor(
     private userEditor: UserEditorService,
     private adminService: AdminService,
     private auth: AuthService,
+    private orderService: OrderService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +58,22 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
         })
       }
     }))
+
+    this.getItems()
+  }
+
+  getItems() {
+    this.orderService.getItems().subscribe(response => {
+      this.items = response as ItemInterface[]
+      this.itemArrayForm = this.itemsForm.controls.items as FormArray
+      for (let item of this.items) {
+        this.itemArrayForm.push(new FormGroup({
+          select: new FormControl(false),
+          id: new FormControl(item.id),
+          counter: new FormControl(0),
+        }))
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -64,5 +93,33 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
 
   getAddresses(): AddressInterface[] {
     return this.currentUser?.addresses?.filter(e => e.isActual) as AddressInterface[]
+  }
+
+  createOrder() {
+    let items = []
+    const array = this.itemArrayForm.value
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].select) {
+        items.push({
+          id: this.items[i].id,
+          counter: array[i].counter
+        })
+      }
+    }
+    if (this.currentUser && this.currentPhone && this.currentAddress)
+      this.orderService.createOrder(items, this.currentUser, this.currentPhone, this.currentAddress).subscribe(response => {
+        this.router.navigate(['/', 'order'])
+      })
+
+  }
+
+  selectItem() {
+    for (let item of this.itemArrayForm.value) {
+      if (item.select) {
+        this.hasSelected = true
+        return
+      }
+    }
+    this.hasSelected = false
   }
 }

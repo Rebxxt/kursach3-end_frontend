@@ -5,6 +5,7 @@ import {UserInterface} from "../interfaces/user.interface";
 import {UserTransportInterface} from "../interfaces/user-transport.interface";
 import {PhoneInterface} from "../interfaces/phone.interface";
 import {AddressInterface} from "../interfaces/address.interface";
+import {RoleEnum} from "../interfaces/role.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,11 @@ export class UserEditorService {
     private http: HttpClient,
   ) { }
 
-  getUsers() {
-    return this.http.get('/api/user/')
+  getUsers(role?: string) {
+    let params: any = {}
+    if (role)
+      params['role'] = role
+    return this.http.get('/api/user/', { params })
   }
 
   changeRole(role: RoleInterface, user: UserInterface) {
@@ -36,10 +40,10 @@ export class UserEditorService {
     return this.http.post('/api/phone/', {phone, user: user.id})
   }
 
-  addUserAddress(address: AddressInterface, user: UserInterface) {
+  addUserAddress(address: string, user: UserInterface) {
     let body = {
-      address: address.address,
-      type: address.type,
+      address: address,
+      type: 1,
       user: user.id,
     };
     return this.http.post('/api/address/', body)
