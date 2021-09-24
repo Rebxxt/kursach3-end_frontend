@@ -5,3 +5,53 @@
 .center {
   text-align: center;
 }
+
+
+input {
+  border: 1px solid #bbbbbb;
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin: auto;
+  display: block;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.delete-button {
+  border: 0;
+  background: rgb(255, 116, 23);
+  color: white;
+  padding: 5px 20px;
+  font-weight: bold;
+  display: block;
+  transition: 0.5s;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+
+.i-button {
+  cursor: pointer;
+  border: 0;
+  background: rgb(255, 116, 23);
+  color: white;
+  padding: 5px 20px;
+  font-weight: bold;
+  font-size: 10px;
+  display: block;
+  margin-left: 15px;
+  width: 100%;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.i-button:disabled {
+  cursor: no-drop;
+  border: 0;
+  background: rgb(109, 109, 109);
+  color: white;
+  padding: 5px 20px;
+  margin-left: 15px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+}

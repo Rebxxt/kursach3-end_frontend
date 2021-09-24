@@ -1,0 +1,54 @@
+.form-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.temp-input {
+  border: 1px solid #bbbbbb;
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin: 5px;
+  display: block;
+  width: 70%;
+  box-sizing: border-box;
+}
+
+.delete-button {
+  border: 0;
+  background: rgb(255, 116, 23);
+  color: white;
+  padding: 5px 20px;
+  font-weight: bold;
+  display: block;
+  transition: 0.5s;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+
+.i-button {
+  cursor: pointer;
+  border: 0;
+  background: rgb(255, 116, 23);
+  margin-top: 15px;
+  color: white;
+  padding: 5px 20px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.i-button:disabled {
+  cursor: no-drop;
+  border: 0;
+  background: rgb(109, 109, 109);
+  margin-top: 15px;
+  color: white;
+  padding: 5px 20px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+}

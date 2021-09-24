@@ -1,0 +1,19 @@
+
+.i-button {
+  cursor: pointer;
+  border: 0;
+  background: rgb(255, 116, 23);
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold;
+  width: 150px;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.i-button:disabled {
+  cursor: no-drop;
+  border: 0;
+  background: rgb(109, 109, 109);
+  color: white;
+}

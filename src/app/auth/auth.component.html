@@ -1,6 +1,16 @@
-<h3>Авторизация</h3>
-<form [formGroup]="auth_form" (ngSubmit)="auth()">
-  <input type="text" formControlName="login" placeholder="Логин">
-  <input type="password" formControlName="password" placeholder="Пароль">
-  <input type="submit" placeholder="Войти">
-</form>
+
+<div class="wrapper">
+  <div class="card">
+    <h3>Авторизация</h3>
+    <form [formGroup]="auth_form" (ngSubmit)="auth()" class="auth-form">
+      <input type="text" formControlName="login" placeholder="Логин">
+      <input type="password" formControlName="password" placeholder="Пароль">
+      <button type="submit" [disabled]="auth_form.invalid">Войти</button>
+    </form>
+  </div>
+  <div class="card wrong" *ngIf="auth_form.invalid && auth_form.touched">
+    <h4 class="notification">Неверно введены данные</h4>
+    <p *ngIf="auth_form.controls['login'].invalid">Требуется заполнить поле логин</p>
+    <p *ngIf="auth_form.controls['password'].invalid">Требуется заполнить поле пароль</p>
+  </div>
+</div>

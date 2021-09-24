@@ -1,56 +1,60 @@
 <div *ngIf="profile">
-  <p>{{profile.username}} <span *ngIf="profile.isSuperuser" style="color: red">Администратор</span></p>
-  <p>Имя: {{profile.firstName}}</p>
-  <p>Фамилия: {{profile.lastName}}</p>
-  <p>Email: {{profile.email}}</p>
+  <div class="main-info">
+    <h3>{{profile.username}} <span *ngIf="profile.isSuperuser" style="color: red">Администратор</span></h3>
+    <p>Имя: {{profile.firstName}}</p>
+    <p>Фамилия: {{profile.lastName}}</p>
+    <p>Email: {{profile.email}}</p>
 
-  <p>Дата регистрации: {{profile.dateJoined}}</p>
-  <p>Последний вход: {{profile.lastLogin}}</p>
-
-  <div>
-    <p>Транспорт: <span *ngIf="!profile.transports?.length">Отсутствует</span></p>
-    <ul *ngIf="profile.transports?.length">
-      <li *ngFor="let transport of profile.transports">{{transport.type}} - {{transport.registrationNumber}}
-        - {{transport.info}}</li>
-    </ul>
+    <p>Дата регистрации: {{profile.dateJoined | date}}</p>
+    <p>Последний вход: {{profile.lastLogin | date}}</p>
   </div>
 
-
-  <div>
-    <p>
-      <span>Адреса:</span>
-      <button (click)="openAddressInput()">{{!showAddressEditor ? 'Редактировать' : 'Скрыть редактирование' }}</button>
-    </p>
-
-    <div *ngIf="showAddressEditor">
-      <input type="text" [formControl]="addressControl">
-      <button (click)="addUserAddress()">Добавить</button>
+  <div class="dop-info">
+    <div>
+      <h4>Транспорт: <span *ngIf="!profile.transports?.length">Отсутствует</span></h4>
+      <ul *ngIf="profile.transports?.length">
+        <li *ngFor="let transport of profile.transports">{{transport.type}} - {{transport.registrationNumber}}
+          - {{transport.info}}</li>
+      </ul>
     </div>
 
-    <mat-list>
-      <mat-list-item *ngFor="let address of profile.addresses; let i = index">
-        <p>{{address.type}} - {{address.address}} - {{address.isActual ? 'Актуален' : 'Не актуален'}}</p>
-        <button (click)="deleteUserAddress(address.id, i)" *ngIf="showAddressEditor">Удалить</button>
-      </mat-list-item>
-    </mat-list>
-  </div>
 
-  <div>
-    <p>
-      <span>Телефоны:</span>
-      <button (click)="openPhoneInput()">{{!showPhoneEditor ? 'Редактировать' : 'Скрыть редактирование' }}</button>
-    </p>
+    <div>
+      <h4>
+        Адреса:
+      </h4>
+      <button class="i-button" (click)="openAddressInput()">{{!showAddressEditor ? 'Редактировать' : 'Скрыть редактирование' }}</button>
 
-    <div *ngIf="showPhoneEditor">
-      <input type="text" [formControl]="phoneControl">
-      <button (click)="addUserProne()">Добавить</button>
+      <div *ngIf="showAddressEditor">
+        <input type="text" [formControl]="addressControl">
+        <button class="i-button" (click)="addUserAddress()">Добавить</button>
+      </div>
+
+      <mat-list>
+        <mat-list-item *ngFor="let address of profile.addresses; let i = index" class="space-between">
+          <p>{{address.type}} - {{address.address}} - {{address.isActual ? 'Актуален' : 'Не актуален'}}</p>
+          <button class="i-button" (click)="deleteUserAddress(address.id, i)" *ngIf="showAddressEditor">Удалить</button>
+        </mat-list-item>
+      </mat-list>
     </div>
 
-    <mat-list>
-      <mat-list-item *ngFor="let phone of profile.phones; let i = index">
-        <p>{{phone.phone}}</p>
-        <button (click)="deleteUserPhone(phone.id, i)" *ngIf="showPhoneEditor">Удалить</button>
-      </mat-list-item>
-    </mat-list>
+    <div>
+      <h4>
+        Телефоны:
+      </h4>
+      <button class="i-button" (click)="openPhoneInput()">{{!showPhoneEditor ? 'Редактировать' : 'Скрыть редактирование' }}</button>
+
+      <div *ngIf="showPhoneEditor">
+        <input type="text" [formControl]="phoneControl">
+        <button class="i-button" (click)="addUserProne()">Добавить</button>
+      </div>
+
+      <mat-list>
+        <mat-list-item *ngFor="let phone of profile.phones; let i = index">
+          <p>{{phone.phone}}</p>
+          <button class="i-button" (click)="deleteUserPhone(phone.id, i)" *ngIf="showPhoneEditor">Удалить</button>
+        </mat-list-item>
+      </mat-list>
+    </div>
   </div>
 </div>

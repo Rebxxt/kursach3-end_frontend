@@ -46,6 +46,6 @@
     </li>
   </ul>
 
-  <button (click)="createOrder()"
-  [disabled]="!currentUser || !hasSelected">Создать заказ</button>
+  <button (click)="createOrder()" class="i-button"
+  [disabled]="(!currentUser || !hasSelected) || itemsForm.invalid">Создать заказ</button>
 </form>

@@ -10,7 +10,7 @@ import {tap} from "rxjs/operators";
 import {RoleInterface} from "../interfaces/role.interface";
 import {Subscription} from "rxjs";
 import {ItemInterface} from "../interfaces/item.interface";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {OrderService} from "../services/order.service";
 import {Router} from "@angular/router";
 
@@ -68,9 +68,9 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
       this.itemArrayForm = this.itemsForm.controls.items as FormArray
       for (let item of this.items) {
         this.itemArrayForm.push(new FormGroup({
-          select: new FormControl(false),
-          id: new FormControl(item.id),
-          counter: new FormControl(0),
+          select: new FormControl(false, [Validators.required]),
+          id: new FormControl(item.id, [Validators.required]),
+          counter: new FormControl(0, [Validators.required]),
         }))
       }
     })

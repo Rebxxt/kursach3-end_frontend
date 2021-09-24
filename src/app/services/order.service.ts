@@ -20,25 +20,8 @@ export class OrderService {
     return this.http.get('/api/order/')
   }
 
-  createItem(item: ItemInterface) {
-    return this.http.post('/api/item/', {...item, order: (item.order as OrderInterface).id})
-  }
-
   getItems() {
     return this.http.get('/api/item/')
-  }
-
-  updateItems(form: ItemInterface) {
-    return this.http.patch(`/api/item/${form.id}/`, form)
-  }
-
-  createOrder(items: any[], user: UserInterface, phone: PhoneInterface, address: AddressInterface) {
-    return this.http.post('/api/order/', {
-      items,
-      client: user.id,
-      actualPhone: phone.id,
-      actualAddress: address.id,
-    })
   }
 
   getOrder(id: number) {
@@ -53,7 +36,24 @@ export class OrderService {
     return this.http.get('/api/order-status/')
   }
 
+  createItem(item: ItemInterface) {
+    return this.http.post('/api/item/', {...item, order: (item.order as OrderInterface).id})
+  }
+
+  createOrder(items: any[], user: UserInterface, phone: PhoneInterface, address: AddressInterface) {
+    return this.http.post('/api/order/', {
+      items,
+      client: user.id,
+      actualPhone: phone.id,
+      actualAddress: address.id,
+    })
+  }
+
   updateOrderStatus(body: any) {
     return this.http.post('api/order-history/', body)
+  }
+
+  updateItems(form: ItemInterface) {
+    return this.http.patch(`/api/item/${form.id}/`, form)
   }
 }

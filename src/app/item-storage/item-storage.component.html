@@ -41,16 +41,8 @@
         <input type="number" min="-273" max="1000" formControlName="maxTemperature">
       </div>
 
-      <div>
-        <span>Заказы: {{ orders.length }}</span>
-        <mat-select style="width: 200px" formControlName="order">
-          <mat-option *ngFor="let order of orders">
-            {{order.id ? order.id : 'Пустое значение'}}
-          </mat-option>
-        </mat-select>
-      </div>
 
-      <button mat-raised-button color="primary" (click)="createItem()">Создать</button>
+      <button mat-raised-button color="primary" (click)="createItem()" [disabled]="itemCreatorForm.invalid" style="margin-top: 15px">Создать</button>
     </form>
   </mat-expansion-panel>
 </mat-accordion>
@@ -186,7 +178,7 @@
     <ng-container matColumnDef="editor">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element; let i = index">
-        <button (click)="setEditMode(i)">Редактировать</button>
+        <button (click)="setEditMode(i)" class="i-button">Редактировать</button>
       </td>
     </ng-container>
 
@@ -197,6 +189,7 @@
           *ngIf="itemArrayForm.controls[i].value.editor"
           [disabled]="itemArrayForm.controls[i].pristine"
           (click)="save(i)"
+          class="i-button"
         >Сохранить</button>
       </td>
     </ng-container>

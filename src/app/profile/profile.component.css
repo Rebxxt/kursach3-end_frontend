@@ -1,0 +1,42 @@
+.main-info {
+  text-align: left;
+}
+
+.main-info p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.dop-info {
+  text-align: left;
+}
+
+.dop-info h4 span {
+  font-weight: normal;
+}
+
+
+.i-button {
+  cursor: pointer;
+  border: 0;
+  background: rgb(255, 116, 23);
+  color: white;
+  padding: 5px 15px;
+  font-weight: bold;
+  font-size: 10px;
+  width: 30%;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+input {
+  border: 1px solid #bbbbbb;
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin: 5px;
+  width: 40%;
+  box-sizing: border-box;
+}
+
+.space-between {
+  justify-content: space-between;
+}

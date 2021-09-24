@@ -1,3 +1,42 @@
 nav > * {
   margin-right: 15px;
 }
+
+
+.i-button {
+  cursor: pointer;
+  border: 0;
+  background: rgb(255, 50, 23);
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 10px;
+  width: 70px;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px 10px;
+  transition: 0.5s;
+  box-sizing: border-box;
+}
+
+.link:active {
+  text-decoration: none;
+}
+
+.link:hover {
+  background: #aaa;
+  color: white
+}
+
+nav {
+  background: #eee;
+  padding: 4px 15px;
+  box-sizing: border-box;
+}

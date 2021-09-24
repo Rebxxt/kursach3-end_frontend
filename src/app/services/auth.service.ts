@@ -32,8 +32,8 @@ export class AuthService {
       }))
   }
 
-  registration(login: string, password: string) {
-    return this.http.post<UserInterface>('/api/auth/registration/', {login, password}, {observe: 'response'})
+  registration(login: string, password: string, firstName: string, lastName: string) {
+    return this.http.post<UserInterface>('/api/auth/registration/', {login, password, firstName, lastName}, {observe: 'response'})
       .pipe(tap(response => {
         this.setProfile(response.body as UserInterface);
       }))

@@ -1,0 +1,55 @@
+.temp-input {
+  border: 1px solid #bbbbbb;
+  border-radius: 5px;
+  padding: 2px 5px;
+  display: block;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.delete-button {
+  border: 0;
+  background: rgb(255, 116, 23);
+  color: white;
+  padding: 5px 20px;
+  font-weight: bold;
+  display: block;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.full-width {
+  width: 100%;
+  display: flex;
+}
+
+.i-button {
+  cursor: pointer;
+  border: 0;
+  margin-left: 15px;
+  background: rgb(255, 116, 23);
+  color: white;
+  padding: 5px 20px;
+  font-weight: bold;
+  display: block;
+  width: 50%;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.i-button:disabled {
+  cursor: no-drop;
+  border: 0;
+  background: rgb(109, 109, 109);
+  color: white;
+  padding: 5px 20px;
+  font-weight: bold;
+  display: block;
+  width: 50%;
+}
+
+.creator-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

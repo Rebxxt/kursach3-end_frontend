@@ -1,9 +1,22 @@
-<h3>Регистрация</h3>
-<form [formGroup]="auth_form" (ngSubmit)="auth()">
-  <input type="text" formControlName="firstName" placeholder="Имя">
-  <input type="text" formControlName="secondName" placeholder="Фамилия">
-  <input type="text" formControlName="login" placeholder="Логин">
-  <input type="password" formControlName="password" placeholder="Пароль">
-  <input type="password" formControlName="password_repeat" placeholder="Повторите пароль">
-  <input type="submit" placeholder="Войти">
-</form>
+<div class="wrapper">
+  <div class="card">
+    <h3>Регистрация</h3>
+    <form [formGroup]="auth_form" (ngSubmit)="auth()" class="auth-form">
+      <input type="text" formControlName="firstName" placeholder="Имя">
+      <input type="text" formControlName="secondName" placeholder="Фамилия">
+      <input type="text" formControlName="login" placeholder="Логин">
+      <input type="password" formControlName="password" placeholder="Пароль">
+      <input type="password" formControlName="password_repeat" placeholder="Повторите пароль">
+      <button type="submit" [disabled]="auth_form.invalid">Зарегистрироваться</button>
+    </form>
+  </div>
+  <div class="card wrong" *ngIf="auth_form.invalid && auth_form.touched">
+    <h4 class="notification">Неверно введены данные</h4>
+    <p *ngIf="auth_form.controls['firstName'].invalid">Требуется заполнить поле имя</p>
+    <p *ngIf="auth_form.controls['secondName'].invalid">Требуется заполнить поле фамилия</p>
+    <p *ngIf="auth_form.controls['login'].invalid">Требуется заполнить поле логин</p>
+    <p *ngIf="auth_form.controls['password'].invalid">Требуется заполнить поле пароль</p>
+    <p *ngIf="auth_form.controls['password_repeat'].invalid">Требуется повторить пароль</p>
+    <p *ngIf="checkPasswordsMethod()">Пароли не совпадают</p>
+  </div>
+</div>

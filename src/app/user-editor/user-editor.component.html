@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill" >
+<mat-form-field appearance="fill" style="width: 50%; margin-top: 110px">
   <mat-label>Пользователь</mat-label>
   <mat-select [(value)]="currentUser" (valueChange)="selectUser($event)">
     <mat-option
@@ -10,7 +10,7 @@
 
 <div>
   <h1>Роли пользователя</h1>
-  <ul>
+  <ul style="text-align: left; margin-left: 30%; list-style: none">
     <li *ngFor="let role of roles?.value">
       <mat-checkbox
         [(ngModel)]="role.user_has_role"
@@ -23,7 +23,7 @@
   </ul>
 </div>
 
-<form [formGroup]="userTransportGroup" *ngIf="userTransportGroup">
+<form [formGroup]="userTransportGroup" *ngIf="userTransportGroup" class="form-wrap">
   <h1>Транспорт пользователя</h1>
   <mat-list formArrayName="transports">
     <mat-list-item
@@ -36,6 +36,7 @@
       </mat-select>
 
       <input
+        class="temp-input"
         type="text"
         placeholder="Регистрационный номер"
         [value]="transportControl.value.registrationNumber"
@@ -44,6 +45,7 @@
       >
 
       <input
+        class="temp-input"
         type="text"
         placeholder="Основная информация"
         [value]="transportControl.value.info"
@@ -51,11 +53,14 @@
         [disabled]="!this.currentUser"
       >
 
-      <button (click)="removeUserTransport(i)" [disabled]="!this.currentUser">Удалить</button>
+      <button (click)="removeUserTransport(i)" [disabled]="!this.currentUser" class="delete-button">Удалить</button>
     </mat-list-item>
   </mat-list>
-  <button (click)="pushToArray(null)" [disabled]="!this.currentUser">Добавить транспорт</button>
-  <button (click)="saveTransports()" [disabled]="!this.currentUser">Сохранить</button>
+
+  <div style="width: 50%">
+    <button class="i-button" (click)="pushToArray(null)" [disabled]="!this.currentUser">Добавить транспорт</button>
+    <button class="i-button" (click)="saveTransports()" [disabled]="!this.currentUser">Сохранить</button>
+  </div>
 </form>
 
 

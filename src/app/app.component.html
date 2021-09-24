@@ -1,14 +1,12 @@
 <nav>
-  <a routerLink="/">HOME</a>
-  <a routerLink="/auth">Авторизация</a>
-  <a routerLink="/registration">Регистрация</a>
-  <a routerLink="/profile">Пользователь</a>
-  <a routerLink="/order">Заказы</a>
-  <a routerLink="/order/history">История заказов</a>
-  <a routerLink="/storage">Склад</a>
-  <a routerLink="/admin">Админ</a>
-  <a routerLink="/user-editor">Редактирование пользователей</a>
-  <button (click)="logout()">Выйти</button>
+  <a routerLink="/auth" *ngIf="profile == null" class="link">Авторизация</a>
+  <a routerLink="/registration" *ngIf="profile == null" class="link">Регистрация</a>
+  <a routerLink="/profile" *ngIf="profile != null" class="link">Пользователь</a>
+  <a routerLink="/order" *ngIf="checkRole('manager') || checkRole('admin')" class="link">Заказы</a>
+  <a routerLink="/storage" *ngIf="checkRole('manager') || checkRole('admin')" class="link">Склад</a>
+  <a routerLink="/admin" *ngIf="checkRole('admin')" class="link">Админ</a>
+  <a routerLink="/user-editor" *ngIf="checkRole('manager') || checkRole('admin')" class="link">Редактирование пользователей</a>
+  <button (click)="logout()" *ngIf="profile != null" class="i-button">Выйти</button>
 </nav>
 
 

@@ -12,13 +12,13 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class ItemStorageComponent implements OnInit {
   itemCreatorForm: FormGroup = new FormGroup({
-    item: new FormControl(''),
-    code: new FormControl(''),
-    counter: new FormControl(0),
-    isFragile: new FormControl(false),
-    isSunlightDamaged: new FormControl(false),
-    isMoistureDamaged: new FormControl(false),
-    isTemperatureDamaged: new FormControl(false),
+    item: new FormControl('', [Validators.required]),
+    code: new FormControl('', [Validators.required]),
+    counter: new FormControl(0, [Validators.required]),
+    isFragile: new FormControl(false, [Validators.required]),
+    isSunlightDamaged: new FormControl(false, [Validators.required]),
+    isMoistureDamaged: new FormControl(false, [Validators.required]),
+    isTemperatureDamaged: new FormControl(false, [Validators.required]),
     minTemperature: new FormControl(null, [Validators.min(-273.15), Validators.max(1000)]),
     maxTemperature: new FormControl(null, [Validators.min(-273.15), Validators.max(1000)]),
     order: new FormControl()
